@@ -1,10 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <SDL.h>
 #include "GameObject.hpp"
-
-class SDL_Window;
-class SDL_Renderer;
 
 struct AppWindowParams {
 	std::string title;
@@ -22,7 +20,7 @@ private:
 	uint64_t lastPerformance;
 	double deltaTime;
 	unsigned int fps;
-	std::vector<GameObject> gameObjects;
+	std::vector<GameObject*> gameObjects;
 	bool running;
 
 public:
@@ -30,6 +28,7 @@ public:
 	~App();
 	void Run(AppWindowParams params);
 	void HandleInput();
+	void HandleKeyDown(SDL_Event& event);
 	void Update();
 	void Render();
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.hpp"
 
-class SDL_Renderer;
+typedef struct SDL_Renderer;
 
 class Transform
 {
@@ -32,8 +32,8 @@ public:
 
 	Transform transform;
 
-	virtual void Update(double dT) {};
-	virtual void Render(SDL_Renderer* renderer) {};
+	virtual void Update(double dT);
+	virtual void Render(SDL_Renderer* renderer);
 	
 	void ResetTransform();
 };

@@ -33,6 +33,14 @@ GameObject::GameObject(Vector2 pos, float rotation) : GameObject(pos, Vector2::O
 GameObject::~GameObject()
 {}
 
+void GameObject::Update(double dT) {
+	std::cout << "Update isn't overrided !" << std::endl;
+}
+
+void GameObject::Render(SDL_Renderer* renderer) {
+	std::cout << "Render isn't overrided !" << std::endl;
+}
+
 void GameObject::ResetTransform() {
 	transform.Reset();
 }

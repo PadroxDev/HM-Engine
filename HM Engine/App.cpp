@@ -1,9 +1,8 @@
-#include "App.hpp"
-#include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include <SDL_ttf.h>
 #include <iostream>
+#include <SDL_ttf.h>
+#include "App.hpp"
 #include "Sprite.hpp"
 
 App::App() : window(nullptr), renderer(nullptr), running(false), currentPerformance(0),
@@ -51,13 +50,14 @@ void App::Run(AppWindowParams params) {
 		std::cout << "Renderer creation failed!" << std::endl;
 		exit(1);
 	}
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
 
 	running = true;
 	currentPerformance = SDL_GetPerformanceCounter();
 	gameObjects.clear();
-	Sprite sprite("res/img/test.png", renderer);
-	gameObjects.push_back(sprite);
+	Sprite sprite("res/img/marly.png", renderer);
+	sprite.transform.Size *= 2;
+	gameObjects.push_back(&sprite);
 
 	while (running) {
 		HandleInput();
@@ -69,9 +69,22 @@ void App::Run(AppWindowParams params) {
 void App::HandleInput() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_QUIT) {
+		switch(event.type) {
+		case SDL_KEYDOWN:
+			HandleKeyDown(event);
+			break;
+		case SDL_QUIT:
 			running = false;
+			break;
 		}
+	}
+}
+
+void App::HandleKeyDown(SDL_Event& event) {
+	switch (event.key.keysym.sym) {
+	case SDLK_d:
+		gameObjects[0]->transform.Position += Vector2::Right;
+		break;
 	}
 }
 
@@ -83,16 +96,17 @@ void App::Update() {
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
-		gameObjects[i].Update(deltaTime);
+		gameObjects[i]->Update(deltaTime);
 	}
 }
 
 void App::Render() {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 	
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
-		gameObjects[i].Render(renderer);
+		gameObjects[i]->Render(renderer);
 	}
 	
 	SDL_RenderPresent(renderer);

@@ -4,24 +4,30 @@
 #include "Sprite.hpp"
 #include "Mathf.hpp"
 
-Sprite::Sprite(std::string _path, SDL_Renderer* renderer) : GameObject(), path(_path)
+Sprite::Sprite(std::string _path, SDL_Renderer* renderer) : GameObject(), path(_path), imageTex(nullptr)
 {
-	SDL_Surface* image = IMG_Load(path.c_str());
+	SDL_Surface* imageSurf = IMG_Load(path.c_str());
+	if (imageSurf == nullptr) {
+		std::cout << "Sprite's image failed to load!\nError: " << IMG_GetError() << std::endl;
+		return;
+	}
+	imageTex = SDL_CreateTextureFromSurface(renderer, imageSurf);
+	SDL_FreeSurface(imageSurf);
 }
 
 Sprite::~Sprite()
-{
-	SDL_FreeSurface(image);
-}
+{}
 
 void Sprite::Update(double dT) {
-	std::cout << "Updated !" << std::endl;
+
 }
 
 void Sprite::Render(SDL_Renderer* renderer) {
-	SDL_Rect destRect = { transform.Position.x, transform.Position.y,
+	SDL_Rect destRect = {
+		transform.Position.x * Mathf::PixelsPerUnit,
+		transform.Position.y * Mathf::PixelsPerUnit,
 		transform.Size.x * Mathf::PixelsPerUnit,
 		transform.Size.y * Mathf::PixelsPerUnit
 	};
-	SDL_RenderCopy(renderer, SDL_CreateTextureFromSurface(renderer, image), nullptr, &destRect);
+	SDL_RenderCopy(renderer, imageTex, nullptr, &destRect);
 }

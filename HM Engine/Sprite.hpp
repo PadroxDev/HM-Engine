@@ -3,13 +3,13 @@
 #include "Vector.hpp"
 #include <string>
 
-class SDL_Renderer;
+typedef struct SDL_Renderer;
 
 class Sprite : public GameObject
 {
 protected:
 	std::string path;
-	SDL_Surface* image;
+	SDL_Texture* imageTex;
 
 public:
 	Sprite(std::string path, SDL_Renderer* renderer);

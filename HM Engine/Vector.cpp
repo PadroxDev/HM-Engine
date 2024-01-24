@@ -30,16 +30,45 @@ Vector2 Vector2::operator-(Vector2 const& vec) {
 	);
 }
 
-Vector2 Vector2::operator*(double const& scalar) {
+Vector2 Vector2::operator*(float scalar) {
 	return Vector2(
 		x * scalar,
 		y * scalar
 	);
 }
 
-Vector2 Vector2::operator/(double const& scalar) {
+Vector2 Vector2::operator/(float scalar) {
 	return Vector2(
 		x / scalar,
 		y / scalar
 	);
+}
+
+Vector2& Vector2::operator+=(Vector2 const& vec) {
+	x += vec.x;
+	y += vec.y;
+	return *this;
+}
+
+Vector2& Vector2::operator-=(Vector2 const& vec) {
+	x -= vec.x;
+	y -= vec.y;
+	return *this;
+}
+
+Vector2& Vector2::operator*=(float scalar) {
+	x *= scalar;
+	y *= scalar;
+	return *this;
+}
+
+Vector2& Vector2::operator/=(float scalar) {
+	x /= scalar;
+	y /= scalar;
+	return *this;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector2& vec) {
+	os << "x: " << vec.x << ", y: " << vec.y;
+	return os;
 }

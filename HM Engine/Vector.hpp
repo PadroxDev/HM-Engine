@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class Vector2
 {
@@ -21,6 +22,11 @@ public:
 
 	Vector2 operator+(Vector2 const& vec);
 	Vector2 operator-(Vector2 const& vec);
-	Vector2 operator*(double const& scalar);
-	Vector2 operator/(double const& scalar);
+	Vector2 operator*(float scalar);
+	Vector2 operator/(float scalar);
+	Vector2& operator+=(Vector2 const& vec);
+	Vector2& operator-=(Vector2 const& vec);
+	Vector2& operator*=(float scalar);
+	Vector2& operator/=(float scalar);
+	friend std::ostream& operator<<(std::ostream& os, const Vector2& vec);
 };
