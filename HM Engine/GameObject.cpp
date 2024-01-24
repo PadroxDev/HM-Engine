@@ -2,15 +2,36 @@
 
 #pragma region Transform
 
+Transform::Transform() : Position(Vector2::Zero), Size(Vector2::One), Rotation(0)
+{}
+
+Transform::~Transform()
+{}
+
 void Transform::Reset() {
-	position = Vector2::Zero;
-	rotation = 0;
-	size = Vector2::Zero;
+	Position = Vector2::Zero;
+	Rotation = 0;
+	Size = Vector2::Zero;
 }
 
 #pragma endregion Transform
 
 #pragma region GameObject
+
+GameObject::GameObject(Vector2 pos, Vector2 size, float rotation)
+{
+	transform.Position = pos;
+	transform.Size = size;
+	transform.Rotation = rotation;
+}
+
+GameObject::GameObject() : GameObject(Vector2::Zero, Vector2::One, 0) {}
+GameObject::GameObject(Vector2 pos) : GameObject(pos, Vector2::One, 0) {}
+GameObject::GameObject(Vector2 pos, Vector2 size) : GameObject(pos, size, 0) {}
+GameObject::GameObject(Vector2 pos, float rotation) : GameObject(pos, Vector2::One, rotation) {}
+
+GameObject::~GameObject()
+{}
 
 void GameObject::ResetTransform() {
 	transform.Reset();

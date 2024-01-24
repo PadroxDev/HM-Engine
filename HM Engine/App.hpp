@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "GameObject.hpp"
 
 class SDL_Window;
 class SDL_Renderer;
@@ -20,6 +22,7 @@ private:
 	uint64_t lastPerformance;
 	double deltaTime;
 	unsigned int fps;
+	std::vector<GameObject> gameObjects;
 	bool running;
 
 public:
