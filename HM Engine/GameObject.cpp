@@ -1,4 +1,5 @@
 #include "GameObject.hpp"
+#include "Component.h"
 
 #pragma region Transform
 
@@ -23,6 +24,8 @@ GameObject::GameObject(Vector2 pos, Vector2 size, float rotation)
 	transform.Position = pos;
 	transform.Size = size;
 	transform.Rotation = rotation;
+
+	components.clear();
 }
 
 GameObject::GameObject() : GameObject(Vector2::Zero, Vector2::One, 0) {}

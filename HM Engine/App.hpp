@@ -2,7 +2,8 @@
 #include <string>
 #include <vector>
 #include <SDL.h>
-#include "GameObject.hpp"
+
+typedef struct GameObject;
 
 struct AppWindowParams {
 	std::string title;

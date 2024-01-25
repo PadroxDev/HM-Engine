@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL_ttf.h>
 #include "App.hpp"
+#include "GameObject.hpp"
 #include "Sprite.hpp"
 
 App::App() : window(nullptr), renderer(nullptr), running(false), currentPerformance(0),
